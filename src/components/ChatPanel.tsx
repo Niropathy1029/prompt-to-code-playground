@@ -13,9 +13,10 @@ interface Message {
 
 interface ChatPanelProps {
   onCodeGenerate: (code: string) => void;
+  onHtmlGenerate: (html: string) => void;
 }
 
-export const ChatPanel = ({ onCodeGenerate }: ChatPanelProps) => {
+export const ChatPanel = ({ onCodeGenerate, onHtmlGenerate }: ChatPanelProps) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -57,9 +58,52 @@ export const ChatPanel = ({ onCodeGenerate }: ChatPanelProps) => {
 
   const generateCodeResponse = (prompt: string) => {
     // Simple code generation based on keywords
-    if (prompt.toLowerCase().includes('button')) {
+    if (prompt.toLowerCase().includes('website') || prompt.toLowerCase().includes('webpage') || prompt.toLowerCase().includes('html')) {
+      const html = `<div style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
+  <header style="text-align: center; margin-bottom: 40px;">
+    <h1 style="color: #333; font-size: 2.5em; margin-bottom: 10px;">Welcome to My Website</h1>
+    <p style="color: #666; font-size: 1.2em;">Generated based on your request: "${prompt}"</p>
+  </header>
+  
+  <main>
+    <section style="margin-bottom: 30px;">
+      <h2 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">About</h2>
+      <p style="line-height: 1.6; color: #555;">This is a beautiful website created with HTML and CSS. It features a clean design with modern styling.</p>
+    </section>
+    
+    <section style="margin-bottom: 30px;">
+      <h2 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">Features</h2>
+      <ul style="line-height: 1.8; color: #555;">
+        <li>Responsive design</li>
+        <li>Clean typography</li>
+        <li>Modern color scheme</li>
+      </ul>
+    </section>
+    
+    <section>
+      <button style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        Get Started
+      </button>
+    </section>
+  </main>
+</div>`;
+      
+      onHtmlGenerate(html);
       return {
-        message: 'I\'ve generated a beautiful button component for you!',
+        message: 'I\'ve generated a beautiful website for you! Check the preview panel.',
+        code: `<!-- Generated HTML Website -->
+${html}`
+      };
+    }
+
+    if (prompt.toLowerCase().includes('button')) {
+      const html = `<button style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'">
+  Beautiful Button
+</button>`;
+      
+      onHtmlGenerate(html);
+      return {
+        message: 'I\'ve generated a beautiful button for you!',
         code: `import React from 'react';
 
 const Button = ({ children, onClick, variant = 'primary' }) => {
@@ -84,6 +128,15 @@ export default Button;`
     }
 
     if (prompt.toLowerCase().includes('card')) {
+      const html = `<div style="background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 24px; max-width: 400px; margin: 20px auto; border: 1px solid #e1e5e9;">
+  <h3 style="color: #2c3e50; font-size: 1.5em; margin-bottom: 12px; font-weight: 600;">Beautiful Card</h3>
+  <p style="color: #666; line-height: 1.6; margin-bottom: 20px;">This is a sleek card component with modern styling and subtle shadows.</p>
+  <button style="background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='#2980b9'" onmouseout="this.style.background='#3498db'">
+    Learn More
+  </button>
+</div>`;
+      
+      onHtmlGenerate(html);
       return {
         message: 'Here\'s a sleek card component!',
         code: `import React from 'react';
@@ -102,6 +155,18 @@ export default Card;`
       };
     }
 
+    // Default response with basic HTML
+    const defaultHtml = `<div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;">
+  <h2 style="color: #2c3e50; font-size: 2em; margin-bottom: 20px;">Generated Component</h2>
+  <p style="color: #666; font-size: 1.1em; line-height: 1.6;">
+    This component was generated based on your prompt: "${prompt}"
+  </p>
+  <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #3498db;">
+    <p style="color: #555; margin: 0;">Try asking for specific components like "button", "card", or "website" for better results!</p>
+  </div>
+</div>`;
+    
+    onHtmlGenerate(defaultHtml);
     return {
       message: 'I\'ve generated a React component based on your request!',
       code: `import React from 'react';
