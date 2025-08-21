@@ -2,50 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Code Playground Design System - Dark coding theme optimized for developers */
+/* JV3 Design System - Unique purple-cyan coding theme */
 
 @layer base {
   :root {
-    /* Dark coding theme - main colors */
-    --background: 220 13% 9%;
-    --foreground: 220 14% 96%;
+    /* JV3 unique theme - main colors */
+    --background: 251 91% 6%;
+    --foreground: 280 15% 94%;
 
-    --card: 220 13% 11%;
-    --card-foreground: 220 14% 96%;
+    --card: 251 91% 8%;
+    --card-foreground: 280 15% 94%;
 
-    --popover: 220 13% 11%;
-    --popover-foreground: 220 14% 96%;
+    --popover: 251 91% 8%;
+    --popover-foreground: 280 15% 94%;
 
-    --primary: 142 76% 58%;
-    --primary-foreground: 220 13% 9%;
+    --primary: 271 91% 65%;
+    --primary-foreground: 251 91% 6%;
+    --primary-glow: 285 100% 75%;
 
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 220 14% 96%;
+    --secondary: 251 50% 12%;
+    --secondary-foreground: 280 15% 94%;
 
-    --muted: 220 13% 15%;
-    --muted-foreground: 220 9% 55%;
+    --muted: 251 50% 12%;
+    --muted-foreground: 270 15% 65%;
 
-    --accent: 220 13% 15%;
-    --accent-foreground: 220 14% 96%;
+    --accent: 180 100% 70%;
+    --accent-foreground: 251 91% 6%;
 
-    --destructive: 0 84% 63%;
-    --destructive-foreground: 220 14% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 280 15% 94%;
 
-    --border: 220 13% 20%;
-    --input: 220 13% 15%;
-    --ring: 142 76% 58%;
+    --border: 251 50% 18%;
+    --input: 251 50% 12%;
+    --ring: 271 91% 65%;
 
     /* Code editor specific colors */
-    --code-bg: 220 13% 9%;
-    --code-border: 220 13% 20%;
-    --syntax-keyword: 221 83% 53%;
-    --syntax-string: 142 76% 58%;
-    --syntax-number: 35 77% 49%;
-    --syntax-comment: 220 9% 55%;
+    --code-bg: 251 91% 6%;
+    --code-border: 251 50% 18%;
+    --syntax-keyword: 271 91% 70%;
+    --syntax-string: 180 100% 70%;
+    --syntax-number: 35 100% 65%;
+    --syntax-comment: 270 15% 65%;
     
     /* Chat specific colors */
-    --chat-user: 142 76% 58%;
-    --chat-assistant: 220 13% 15%;
+    --chat-user: 271 91% 65%;
+    --chat-assistant: 251 50% 12%;
+    
+    /* JV3 gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-bg: linear-gradient(180deg, hsl(var(--background)), hsl(251 91% 4%));
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
     
     --radius: 0.5rem;
 
@@ -118,5 +124,17 @@
 @layer utilities {
   .hover-scale {
     @apply transition-transform duration-200 hover:scale-105;
+  }
+  
+  .jv3-gradient {
+    background: var(--gradient-primary);
+  }
+  
+  .jv3-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .jv3-bg {
+    background: var(--gradient-bg);
   }
 }
